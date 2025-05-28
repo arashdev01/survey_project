@@ -1,13 +1,10 @@
-{% extends "polls/base.html" %}
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li>{{ question.question_text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
 
-{% block content %}
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li>{{ question.question_text }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>هنوز هیچ سؤالی ثبت نشده.</p>
-    {% endif %}
-{% endblock %}
