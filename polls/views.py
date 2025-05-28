@@ -22,15 +22,13 @@ def vote(request, question_id):
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
-        # دوباره فرم رأی رو نشون بده و یه پیام خطا اضافه کن
         return render(request, 'polls/detail.html', {
             'question': question,
-            'error_message': "لطفاً یه گزینه انتخاب کن!",
+            'error_message': "لطفاً یک گزینه را انتخاب کن!",
         })
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # بعد از ذخیره رأی، ریدایرکت کن به صفحه نتایج
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
     
 def results(request, question_id):
